@@ -40,6 +40,7 @@ async function login(req, res) {
 
     // if we got to this line, password is ok. give user a new token.
     const token = jwt.sign({ user }, process.env.SECRET, { expiresIn: "24h" });
+    console.log(token)
     res.status(200).json(token);
   } catch {
     res.status(400).json("Bad Credentials");

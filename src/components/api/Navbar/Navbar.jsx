@@ -60,7 +60,7 @@ export default class Navbar extends Component{
 
                         
                         <li className="nav-item">
-                        <button className="btn-sm nav-link">Logout</button>
+                        <button className="btn-sm nav-link" onClick={this.handleLogout}>Logout</button>
                         </li>
                 </ul>
             </div>

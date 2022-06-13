@@ -48,6 +48,8 @@ function UploadFoto() {
 
       <img src="/images/2afe040be367ca656a433784fe82b5d0"></img>
 
+      <a href="">link to file</a>
+
     </div>
   );
 }
