@@ -4,6 +4,7 @@ import Homepage from './components/api/Homepage/Homepage';
 import Navbar from './components/api/Navbar/Navbar';
 import SearchAsset from './components/api/SearchAsset/SearchAsset';
 import AuthPage from './pages/AuthPage/AuthPage.jsx'
+import Uploadfoto from './components/api/Uploadfoto/Uploadfoto';
 
 import { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -40,6 +41,7 @@ export default class App extends Component {
 
       <Routes>
         <Route path="/" element={<Homepage/>}/>
+        <Route path="/photo" element={<Uploadfoto/>}/>
         <Route path="/search" element ={<SearchAsset/>}/>
         <Route path="/login" element ={<AuthPage setUserInState={this.setUserInState}/>}/>
       </Routes>

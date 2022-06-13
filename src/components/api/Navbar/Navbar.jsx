@@ -38,6 +38,10 @@ export default class Navbar extends Component{
                 
                 <ul className="navbar-nav ms-auto text-center">
 
+                <li className="nav-item">
+                        <Link className="nav-link" to ='/photo'>photo</Link>
+                        </li>
+
                     <li className="nav-item">
                         <Link className="nav-link" to ='/'>{this.props.name}</Link>
                         </li>
