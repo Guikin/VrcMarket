@@ -35,8 +35,19 @@ async function uploadFiletos3(fileObj,bucketName){
    return uploadData
 }
 
+async function getBucketListFromS3(bucketName){
+    const s3 = createS3Instance()
+    const params={
+        Bucket:bucketName,
+        MaxKeys:10
+    }
+    const bucketData = s3.listObjectsV2(params).promise()
+    return bucketData || {}
+}
+
 module.exports = {
-    uploadFiletos3
+    uploadFiletos3,
+    getBucketListFromS3
 }
 
 console.log(adminSecret)
