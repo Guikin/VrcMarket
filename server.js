@@ -3,6 +3,26 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 
+const s3Controller = require('./s3-controller')
+
+
+require('dotenv').config()
+require('./config/database.js')
+
+const bucketName = process.env.AWS_BUCKET_NAME
+const region = process.env.AWS_BUCKET_REGION
+const accessKeyId = process.env.AWS_ACCESS_KEY
+const secretAccessKey = process.env.AWS_SECRET_KEY
+
+
+const S3 = require('aws-sdk/clients/s3')
+const s3 = new S3({
+  region,
+  accessKeyId,
+  secretAccessKey
+})
+
+
 const fs = require('fs')
 const util = require('util')
 const unlinkFile = util.promisify(fs.unlink)
@@ -13,13 +33,22 @@ const upload = multer({ dest: 'uploads/' })
 const { uploadFile, getFileStream } = require('./s3')
 
 
-require('dotenv').config()
-require('./config/database.js')
+
+
 
 const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
+
+app.post('/upload-to-s3',s3Controller.s3Upload);
+
+app.get("/download/:filename", async (req, res) => {
+  console.log("reached download")
+  const filename = req.params.filename
+  let x = await s3.getObject({ Bucket: bucketName, Key: filename }).promise();
+  res.status(200).json(x.Body)
+})
 
 app.get('/images/:key', (req, res) => {
   console.log(req.params)
@@ -42,6 +71,8 @@ app.post('/images', upload.single('image'), async (req, res) => {
   const description = req.body.description
   res.send({imagePath: `/images/${result.Key}`})
 })
+
+
 
 // Configure both serve-favicon & static middlewares
 // to serve from the production 'build' folder

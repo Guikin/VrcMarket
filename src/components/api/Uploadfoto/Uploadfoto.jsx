@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import axios from 'axios'
 
+
+
 import './Uploadfoto.css'
 
 async function postImage({image, description}) {
@@ -13,6 +15,21 @@ async function postImage({image, description}) {
   return result.data
 }
 
+async function handleClick(filename){
+  const fetchResponse = await fetch(`/download/${filename}`,{
+    method: 'GET',
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+ 
+  let response = await fetchResponse.json();
+  console.log(response.data)
+  // const buffer = await response.buffer();
+  // console.log(buffer)
+  // await writeFile('test.mp4', buffer);
+  // console.log('Done!')
+
+  
+}
 
 function UploadFoto() {
 
@@ -35,8 +52,7 @@ function UploadFoto() {
     <div className="App page">
       <h2>Uploadfoto</h2>
       <form onSubmit={submit}>
-        <input onChange={fileSelected} type="file" accept="image/*"></input>
-        <input value={description} onChange={e => setDescription(e.target.value)} type="text"></input>
+        <input onChange={fileSelected} type="file" ></input>
         <button type="submit">Submit</button>
       </form>
 
@@ -48,7 +64,7 @@ function UploadFoto() {
 
       <img src="/images/2afe040be367ca656a433784fe82b5d0"></img>
 
-      <a href="">link to file</a>
+      <button onClick={()=> handleClick("2afe040be367ca656a433784fe82b5d0")}>Link</button>
 
     </div>
   );

@@ -36,9 +36,12 @@ async function login(req, res) {
     const user = await User.findOne({ email: req.body.email });
     // check password. if it's bad throw an error.
     console.log(user.password)
-    if (!(await bcrypt.compare(user.password, req.body.password))) throw new Error();
+    let checkpass = await bcrypt.compare(req.body.password,user.password)
+    console.log("checkpass",checkpass)
+    if (!(await bcrypt.compare(req.body.password,user.password))) throw new Error();
 
     // if we got to this line, password is ok. give user a new token.
+    console.log("reached token creation")
     const token = jwt.sign({ user }, process.env.SECRET, { expiresIn: "24h" });
     console.log(token)
     res.status(200).json(token);
@@ -46,13 +49,5 @@ async function login(req, res) {
     res.status(400).json("Bad Credentials");
   }
 }
-/*-- Helper Functions --*/
 
-function createJWT(user) {
-  return jwt.sign(
-    // data payload
-    { user },
-    process.env.SECRET,
-    { expiresIn: '24h' }
-  );
-}
+

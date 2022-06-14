@@ -5,9 +5,10 @@ import Navbar from './components/api/Navbar/Navbar';
 import SearchAsset from './components/api/SearchAsset/SearchAsset';
 import AuthPage from './pages/AuthPage/AuthPage.jsx'
 import Uploadfoto from './components/api/Uploadfoto/Uploadfoto';
+import UploadAsset from './components/api/UploadAsset/UploadAsset';
 
 import { Component } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 
 
@@ -16,6 +17,7 @@ export default class App extends Component {
 
   state={
     user:null,
+    
   }
 
   setUserInState = (incomingUserData) => {
@@ -37,13 +39,17 @@ export default class App extends Component {
   render() {
     return (
     <div className="App">
-      <Navbar setUserInState={this.setUserInState}/>
+      <Navbar setUserInState={this.setUserInState} user={this.state.user}/>
 
       <Routes>
         <Route path="/" element={<Homepage/>}/>
         <Route path="/photo" element={<Uploadfoto/>}/>
+        <Route path="/upload" element={<UploadAsset/>}/>
         <Route path="/search" element ={<SearchAsset/>}/>
-        <Route path="/login" element ={<AuthPage setUserInState={this.setUserInState}/>}/>
+        {this.state.user ? (
+        <Route path="/login" element={<Navigate to="/" replace />}/>
+        ) : (<Route path="/login" element ={<AuthPage setUserInState={this.setUserInState}/>}/>)}
+        
       </Routes>
 
       

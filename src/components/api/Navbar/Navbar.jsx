@@ -12,10 +12,13 @@ export default class Navbar extends Component{
     this.props.setUserInState(null)
   }
 
+  loguser = () =>{
+    console.log(this.props.user.name)
+  }
+
   
 
   render(){
-
   return (
     <div className='navbar'>
         <nav className="navbar navbar-expand-lg bg-dark navbar-dark fixed-top w-100 m-auto px-5" style={{boxshadow:0+0+3 +"em" + "black"}}>
@@ -37,13 +40,19 @@ export default class Navbar extends Component{
             <div className="collapse navbar-collapse" id="toggleMobileMenu">
                 
                 <ul className="navbar-nav ms-auto text-center">
+                  
+                  <li className="nav-item">
+                  {this.props.user ? (<p className='nav-link' onClick={this.loguser}>{this.props.user.name}</p>):(
+                    <p></p>
+                  )}
+                  </li>
+                  
+                <li className="nav-item">
+                        <Link className="nav-link" to ='/upload'>upload</Link>
+                        </li>
 
                 <li className="nav-item">
                         <Link className="nav-link" to ='/photo'>photo</Link>
-                        </li>
-
-                    <li className="nav-item">
-                        <Link className="nav-link" to ='/'>{this.props.name}</Link>
                         </li>
 
                     <li className="nav-item">
@@ -54,18 +63,15 @@ export default class Navbar extends Component{
                         <Link className="nav-link" to ='/search'>search</Link>
                         </li>
 
-                        <li className="nav-item">
+                        {this.props.user ? ( <li className="nav-item">
+                        <button className="btn btn-dark nav-link" onClick={this.handleLogout}>Logout</button>
+                        </li>) : ( <li className="nav-item">
                         <Link className="nav-link" to ='/login'>login</Link>
                         </li>
-
-                        
-                        <li className="nav-item">
-                        <button className="btn-sm nav-link" onClick={this.handleLogout}>Logout</button>
-                        </li>
+                        )}
                 </ul>
             </div>
         </nav>
-    
     </div>
   )
 }
