@@ -23,7 +23,7 @@ function createS3Instance(){
 }
 
 async function uploadFiletos3(fileObj,bucketName){
-  const s3= createS3Instance();
+  const s3 = createS3Instance();
   const fileStream = fs.createReadStream(fileObj.filepath);
   const params={
     Body:fileStream,
@@ -45,9 +45,21 @@ async function getBucketListFromS3(bucketName){
     return bucketData || {}
 }
 
+async function getPresignedURL(bucketName, key){
+    const s3=createS3Instance()
+    const params ={
+        Bucket:bucketName,
+        Key:key
+    }
+    const preSignedURL = await s3.getSignedUrl('getObject',params)
+    console.log(preSignedURL)
+    return preSignedURL
+}
+
 module.exports = {
     uploadFiletos3,
-    getBucketListFromS3
+    getBucketListFromS3,
+    getPresignedURL
 }
 
 console.log(adminSecret)

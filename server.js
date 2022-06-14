@@ -45,6 +45,8 @@ app.post('/upload-to-s3',s3Controller.s3Upload);
 
 app.get('/all-files',s3Controller.s3Get); 
 
+app.get('/get-object-url/:key',s3Controller.getSignedUrl)
+
 app.get("/download/:filename", async (req, res) => {
   console.log("reached download")
   const filename = req.params.filename

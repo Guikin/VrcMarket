@@ -3,7 +3,6 @@ import { useState,useEffect } from 'react'
 import axios from 'axios'
 
 
-
  async function postAsset({asset}) {
         const formData = new FormData();
         formData.append("asset", asset)
@@ -11,15 +10,13 @@ import axios from 'axios'
         return result.data
     }
 
-
-
-
-
+async function downLoadAsset(key){
+  const url = await axios.get(`/get-object-url/${key}` )
+  console.log(url.data)
+  window.open(url.data,'_blank');
+}
 
 export default function UploadAsset() {
-
-
-
 
     useEffect(()=>{
       async function getBucketObjectList() {
@@ -70,12 +67,15 @@ export default function UploadAsset() {
 
               <p>Download</p>
 
-            <ul > 
+            <ul> 
               {assetData.map(asset => (
-                
-              <li key={asset.eTag}>{asset.key}</li>
+              <li key={asset.eTag}><button onClick={()=>downLoadAsset(asset.key)}>{asset.key}</button></li>
                 ))}</ul> 
                 
+                <form onSubmit={submitAsset}>
+                <input onChange={submitfile} type="file" ></input>
+                <button type="submit">Submit</button>
+              </form>
         
             </div>
           );

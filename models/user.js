@@ -20,7 +20,7 @@ const userSchema = new Schema({
     minLength: 3,
     required: true
   },
-  // assets:[{type:Schema.Types.ObjectId}],
+  assets:[{type:Schema.Types.ObjectId}],
 },{
   timestamps: true,
   // Even though it's hashed - don't send password to clients

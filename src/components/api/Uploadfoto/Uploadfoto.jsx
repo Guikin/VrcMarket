@@ -27,8 +27,6 @@ async function handleClick(filename){
   // console.log(buffer)
   // await writeFile('test.mp4', buffer);
   // console.log('Done!')
-
-  
 }
 
 function UploadFoto() {

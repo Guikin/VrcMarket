@@ -1,6 +1,6 @@
 const formidable = require('formidable');
 const { createHashHistory } = require('history');
-const {uploadFiletos3, getBucketListFromS3} = require('./assets')
+const {uploadFiletos3, getBucketListFromS3,getPresignedURL} = require('./assets')
 
 async function s3Upload (req,res){
     const formData = await readFormData(req);
@@ -18,7 +18,7 @@ async function s3Get(req,res){
     try{
     const bucketData = await getBucketListFromS3('vrcmarketassets')
     const {Contents = []} = bucketData;
-    console.log(Contents)
+    
     res.send((Contents.map(content =>{
         return{
             key:content.Key,
@@ -48,7 +48,22 @@ async function readFormData(req){
     })
 }
 
+async function getSignedUrl(req,res){
+    try{
+        const {key} = req.params
+        console.log(key)
+        const url = await getPresignedURL('vrcmarketassets',key)
+        console.log("url",url)
+        res.send(url)
+
+    }catch(ex){
+        console.log('error',ex)
+        res.send('error')
+    }
+}
+
 module.exports = {
     s3Upload,
-    s3Get
+    s3Get,
+    getSignedUrl
 }
