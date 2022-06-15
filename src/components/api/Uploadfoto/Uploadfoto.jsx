@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Carousel } from 'react-bootstrap';
 
 import './Uploadfoto.css'
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import { set } from 'mongoose';
 
 async function postImage({image}) {
@@ -15,12 +15,43 @@ async function postImage({image}) {
 }
 
 
+
+
+
+
 function UploadFoto() {
   const location = useLocation()
+  const navigate = useNavigate()
+
+async function postForm({user,asset,assetName,description,images,name,categories}){
+  const fetchResponse = await fetch('/asset/edit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: name, 
+      user: user,
+      asset,
+      assetName,
+      description,
+      images,
+      categories,
+    })
+  })
+if(fetchResponse.ok){
+const response = await fetchResponse.json()
+console.log("response is",response)
+navigate('/upload',{state:{user:userData,asset:asset}})
+return response
+}else{
+    console.log('error')
+}
+}
 
   useEffect(()=>{
     
-    setAsset(location.state.asset)
+    if(!asset){
+      setAsset(location.state.asset)
+    }
     
     if(asset){
     getAsset(asset)
@@ -31,8 +62,16 @@ function UploadFoto() {
     if(file){
       callPostPic()
     }
-    console.log(description)
+    if(!userData){
+      setUser(location.state.user)
+    }
+
+    console.log(userData)
+    
+    
   })
+
+
 
 async function getAsset(asset){
   const fetchResponse = await fetch(`/asset/${asset}`, {
@@ -47,7 +86,7 @@ async function getAsset(asset){
   
   function setAssetNamefunc(response){
     setAssetName(response)
-    console.log(assetName)
+    
   }    
 
 
@@ -57,13 +96,15 @@ async function getAsset(asset){
   const [description, setDescription] = useState("")
   const [images, setImages] = useState([])
   const [name,setName]=useState()
+  const [categories,setCategories]=useState([])
+  const [userData,setUser]=useState()
  
 
   const submit = async event => {
     event.preventDefault()
-    const result = await postImage({image: file, description})
+    const result = await postForm({asset,assetName,description,images,name,categories})
     
-    setImages([result.image, ...images])
+    
   }
 
   function callPostPic(){
@@ -114,8 +155,43 @@ async function getAsset(asset){
       )
     }
     
-
   }
+
+  const options = [
+
+    {
+      label: "Animale-pets",
+      value: "Animale-pets",
+    },
+    {
+      label: "Characters-Creatures",
+      value: "Characters-Creatures",
+    },
+    {
+      label: "Electronics-Gadgets",
+      value: "Electronics-Gadgets",
+    },
+    {
+      label: "Fashion-Style",
+      value: "Fashion-Style",
+    },
+    {
+      label: "Furniture-Home",
+      value: "Furniture-Home",
+    },
+    {
+      label: "People",
+      value: "People",
+    },
+    {
+      label: "Fashion-Style",
+      value: "Fashion-Style",
+    },
+    {
+      label: "Weapons-Military",
+      value: "Weapons-Military",
+    },
+  ];
 
   return (
     <div className="App page">
@@ -123,7 +199,7 @@ async function getAsset(asset){
       <h2>Uploadfoto</h2>
       <form onSubmit={submit}>
       <label>Name 
-      <input onChange={(e)=>setName(e.target.value)} type="text" value={name} required placeholder={ assetName }></input>
+      <input onChange={(e)=>setName(e.target.value)} type="text" value={name} placeholder={ assetName }></input>
       </label>
         <input onChange={fileSelected} type="file"></input>
         <Carousel>
@@ -131,6 +207,22 @@ async function getAsset(asset){
         </Carousel>
         <label>Description</label>
         <textarea onChange={(e)=>setDescription(e.target.value)} type="text" rows="6" cols="50" value={description} required placeholder="description"></textarea>
+        <label>Category</label>
+        <select value={categories} onChange={(e)=>setCategories(e.target.value)} >
+            {options.map((option) => (
+              <option value={option.value}>{option.label}</option>
+            ))}
+          </select>
+        {/* <select name="categories" id="categories" multiple >
+          <option onChange={(e)=>setCategories(e.target.value)} value="Animale-pets">Animale-pets</option>
+          <option onChange={(e)=>setCategories(e.target.value)} value="Characters-Creatures">Characters-Creatures</option>
+          <option onChange={(e)=>setCategories(e.target.value)} value="Electronics-Gadgets">Electronics-Gadgets</option>
+          <option onChange={(e)=>setCategories(e.target.value)} value="Fashion-Style">Fashion-Style</option>
+          <option onChange={(e)=>setCategories(e.target.value)} value="Furniture-Home">Furniture-Home</option>
+          <option onChange={(e)=>setCategories(e.target.value)} value="Nature-Plants">Nature-Plants</option>
+          <option onChange={(e)=>setCategories(e.target.value)} value="People">People</option>
+          <option onChange={(e)=>setCategories(e.target.value)} value="Weapons-Military">Weapons-Military</option>
+          </select> */}
         <button type="submit">Submit</button>
       </form>
       

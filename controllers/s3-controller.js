@@ -4,7 +4,7 @@ const {uploadFiletos3, getBucketListFromS3,getPresignedURL} = require('../s3-ser
 
 async function s3Upload (req,res){
     const formData = await readFormData(req);
-    
+    console.log("formData is",formData)
     try{
         await uploadFiletos3(formData.file,'vrcmarketassets')
         res.send('Uploaded!!')
