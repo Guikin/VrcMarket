@@ -6,6 +6,9 @@ import SearchAsset from './components/api/SearchAsset/SearchAsset';
 import AuthPage from './pages/AuthPage/AuthPage.jsx'
 import Uploadfoto from './components/api/Uploadfoto/Uploadfoto';
 import UploadAsset from './components/api/UploadAsset/UploadAsset';
+import UploadForm from './components/api/UploadForm/UploadForm';
+import UserProfile from './components/api/UserProfile/UserProfile';
+import EditAsset from './components/api/EditAsset/EditAsset';
 
 import { Component } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
@@ -43,17 +46,17 @@ export default class App extends Component {
 
       <Routes>
         <Route path="/" element={<Homepage/>}/>
-        <Route path="/photo" element={<Uploadfoto/>}/>
+        <Route path="/photo" element={<Uploadfoto user={this.state.user}/>}/>
         <Route path="/upload" element={<UploadAsset/>}/>
         <Route path="/search" element ={<SearchAsset/>}/>
+        <Route path="/edit" element ={<EditAsset/>}/>
+        <Route path ="/uploadForm" element={<UploadForm user={this.state.user}/>}/> 
+        <Route path="userProfile" element={<UserProfile user={this.state.user}/>}/>
         {this.state.user ? (
         <Route path="/login" element={<Navigate to="/" replace />}/>
         ) : (<Route path="/login" element ={<AuthPage setUserInState={this.setUserInState}/>}/>)}
         
       </Routes>
-
-      
-      
       </div>
     )
   }

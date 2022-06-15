@@ -2,35 +2,36 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
-
-const s3Controller = require('./s3-controller')
+const s3Router = require("./routes/s3/s3")
+const assetRouter = require("./routes/api/assets")
+// const s3Controller = require('./controllers/s3-controller')
 
 
 require('dotenv').config()
 require('./config/database.js')
 
-const bucketName = process.env.AWS_BUCKET_NAME
-const region = process.env.AWS_BUCKET_REGION
-const accessKeyId = process.env.AWS_ACCESS_KEY
-const secretAccessKey = process.env.AWS_SECRET_KEY
+// const bucketName = process.env.AWS_BUCKET_NAME
+// const region = process.env.AWS_BUCKET_REGION
+// const accessKeyId = process.env.AWS_ACCESS_KEY
+// const secretAccessKey = process.env.AWS_SECRET_KEY
 
 
-const S3 = require('aws-sdk/clients/s3')
-const s3 = new S3({
-  region,
-  accessKeyId,
-  secretAccessKey
-})
+// const S3 = require('aws-sdk/clients/s3')
+// const s3 = new S3({
+//   region,
+//   accessKeyId,
+//   secretAccessKey
+// })
 
 
-const fs = require('fs')
-const util = require('util')
-const unlinkFile = util.promisify(fs.unlink)
+// const fs = require('fs')
+// const util = require('util')
+// const unlinkFile = util.promisify(fs.unlink)
 
-const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
+// const multer = require('multer')
+// const upload = multer({ dest: 'uploads/' })
 
-const { uploadFile, getFileStream } = require('./s3')
+// const { uploadFile, getFileStream } = require('./controllers/s3')
 
 
 
@@ -41,40 +42,41 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 
-app.post('/upload-to-s3',s3Controller.s3Upload);
 
-app.get('/all-files',s3Controller.s3Get); 
+// app.post('/upload-to-s3',s3Controller.s3Upload);
 
-app.get('/get-object-url/:key',s3Controller.getSignedUrl)
+// app.get('/all-files',s3Controller.s3Get); 
 
-app.get("/download/:filename", async (req, res) => {
-  console.log("reached download")
-  const filename = req.params.filename
-  let x = await s3.getObject({ Bucket: bucketName, Key: filename }).promise();
-  res.status(200).json(x.Body)
-})
+// app.get('/get-object-url/:key',s3Controller.getSignedUrl)
 
-app.get('/images/:key', (req, res) => {
-  console.log(req.params)
-  const key = req.params.key
-  const readStream = getFileStream(key)
+// app.get("/download/:filename", async (req, res) => {
+//   console.log("reached download")
+//   const filename = req.params.filename
+//   let x = await s3.getObject({ Bucket: bucketName, Key: filename }).promise();
+//   res.status(200).json(x.Body)
+// })
 
-  readStream.pipe(res)
-})
+// app.get('/images/:key', (req, res) => {
+//   console.log(req.params)
+//   const key = req.params.key
+//   const readStream = getFileStream(key)
 
-app.post('/images', upload.single('image'), async (req, res) => {
-  const file = req.file
-  console.log(file)
+//   readStream.pipe(res)
+// })
 
-  // apply filter
-  // resize 
+// app.post('/images', upload.single('image'), async (req, res) => {
+//   const file = req.file
+//   console.log(file)
 
-  const result = await uploadFile(file)
-  await unlinkFile(file.path)
-  console.log(result)
-  const description = req.body.description
-  res.send({imagePath: `/images/${result.Key}`})
-})
+//   // apply filter
+//   // resize 
+
+//   const result = await uploadFile(file)
+//   await unlinkFile(file.path)
+//   console.log(result)
+//   const description = req.body.description
+//   res.send({imagePath: `/images/${result.Key}`})
+// })
 
 
 
@@ -86,7 +88,8 @@ app.use(express.static(path.join(__dirname, 'build')));
 // Put API routes here, before the "catch all" route
 
 app.use(require('./config/auth'));
-
+app.use('/s3',s3Router)
+app.use("/asset",assetRouter)
 app.use('/api/users', require('./routes/api/users'))
 // app.use('/api/orders', require('./routes/api/orders.js'));
 // this one is going to do double duty, serving both items and categories-related routes:

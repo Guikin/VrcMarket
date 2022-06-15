@@ -6,12 +6,12 @@ import axios from 'axios'
  async function postAsset({asset}) {
         const formData = new FormData();
         formData.append("asset", asset)
-        const result = await axios.post('/upload-to-s3', formData, { headers: {'Content-Type': 'multipart/form-data'}})
+        const result = await axios.post('/s3/upload-to-s3', formData, { headers: {'Content-Type': 'multipart/form-data'}})
         return result.data
     }
 
 async function downLoadAsset(key){
-  const url = await axios.get(`/get-object-url/${key}` )
+  const url = await axios.get(`/s3/get-object-url/${key}` )
   console.log(url.data)
   window.open(url.data,'_blank');
 }
@@ -20,7 +20,7 @@ export default function UploadAsset() {
 
     useEffect(()=>{
       async function getBucketObjectList() {
-        const fetchResponse = await fetch('/all-files',{
+        const fetchResponse = await fetch('/s3/all-files',{
           method: 'GET',
         })
         const response = await fetchResponse.json()
@@ -72,11 +72,6 @@ export default function UploadAsset() {
               <li key={asset.eTag}><button onClick={()=>downLoadAsset(asset.key)}>{asset.key}</button></li>
                 ))}</ul> 
                 
-                <form onSubmit={submitAsset}>
-                <input onChange={submitfile} type="file" ></input>
-                <button type="submit">Submit</button>
-              </form>
-        
             </div>
           );
         }

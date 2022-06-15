@@ -1,9 +1,10 @@
 const formidable = require('formidable');
 const { createHashHistory } = require('history');
-const {uploadFiletos3, getBucketListFromS3,getPresignedURL} = require('./assets')
+const {uploadFiletos3, getBucketListFromS3,getPresignedURL} = require('../s3-services')
 
 async function s3Upload (req,res){
     const formData = await readFormData(req);
+    
     try{
         await uploadFiletos3(formData.file,'vrcmarketassets')
         res.send('Uploaded!!')
