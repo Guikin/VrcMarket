@@ -31,7 +31,7 @@ export default class App extends Component {
   componentDidMount() {
     let token = localStorage.getItem('token')
     if (token) {
-      // YOU DO: check expiry!
+      // YOU DO: check expiry! sure 
       let userDoc = JSON.parse(atob(token.split('.')[1])).user // decode jwt token
       this.setState({user: userDoc})      
     }
