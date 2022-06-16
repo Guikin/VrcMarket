@@ -6,6 +6,7 @@ const assetCtrl = require('../../controllers/asset/asset');
 router.post('/create', assetCtrl.create);
 // POST /api/users/login
 router.post('/edit', assetCtrl.edit);
+router.post('/edit2',assetCtrl.edit2)
 
 router.get('/:id',assetCtrl.list)
 

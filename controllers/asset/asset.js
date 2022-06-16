@@ -4,6 +4,7 @@ const formidable = require('formidable');
 module.exports={
     create,
     edit,
+    edit2,
     list
 }
 
@@ -29,6 +30,11 @@ async function edit(req,res){
     console.log(getAsset)
     let passed = "passed"
     res.status(200).json(passed)
+}
+
+async function edit2(req,res){
+    console.log('reached edit2')
+    console.log(req.body)
 }
 
 async function list(req,res){

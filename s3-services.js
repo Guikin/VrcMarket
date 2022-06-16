@@ -31,7 +31,6 @@ async function uploadFiletos3(fileObj,bucketName){
     Key:fileObj.originalFilename
  }
    const uploadData = await s3.upload(params).promise()
-   console.log(uploadData)
    return uploadData
 }
 

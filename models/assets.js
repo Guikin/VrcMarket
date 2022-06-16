@@ -13,7 +13,10 @@ const AssetSchema = new Schema({
     user:{type:String,required:true},
     code:{type:String},
     codelock:{type:Boolean,default:false},
-    description:{type:String,default:''}
+    description:{type:String,default:''},
+    AWSEtag:{type:String,default:''},
+    lastModified:{type:Date},
+    size:{type:String,default:''}
 })
 
 module.exports = mongoose.model('Assets', AssetSchema);
