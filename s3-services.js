@@ -34,7 +34,7 @@ async function uploadFiletos3(fileObj,bucketName){
    return uploadData
 }
 
-async function getBucketListFromS3(bucketName){
+async function getBucketListFromS3(bucketName,Key,Etag){
     const s3 = createS3Instance()
     const params={
         Bucket:bucketName,
@@ -44,11 +44,12 @@ async function getBucketListFromS3(bucketName){
     return bucketData || {}
 }
 
-async function getPresignedURL(bucketName, key){
+async function getPresignedURL(bucketName, key, ETag){
     const s3=createS3Instance()
     const params ={
         Bucket:bucketName,
-        Key:key
+        Key:key,
+        IfMatch:ETag
     }
     const preSignedURL = await s3.getSignedUrl('getObject',params)
     console.log(preSignedURL)

@@ -5,7 +5,9 @@ module.exports={
     create,
     edit,
     edit2,
-    list
+    list,
+    listMyAssets,
+    displayAsset
 }
 
 async function create(req,res){
@@ -33,8 +35,27 @@ async function edit(req,res){
 }
 
 async function edit2(req,res){
-    console.log('reached edit2')
     console.log(req.body)
+    let getAsset= await Assets.findByIdAndUpdate(req.body.assetKey,{
+        AWSkey:req.body.awsKey,
+        Public:req.body.isPublic,
+        codelock:req.body.codeLock,
+        code:req.body.code,
+        AWSEtag:req.body.awsEtag}
+        )
+     let check = await Assets.findById(req.body.assetKey)   
+     console.log('check is', check)
+     let passed = "passed"
+     res.status(200).json(passed)
+}
+
+async function listMyAssets(req,res){
+    console.log('reached my assets')
+}
+
+async function displayAsset(req,res){
+    let getAsset= await Assets.findById(req.params.asset) 
+    res.status(200).json(getAsset)
 }
 
 async function list(req,res){

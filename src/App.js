@@ -9,6 +9,8 @@ import UploadAsset from './components/api/UploadAsset/UploadAsset';
 import UploadForm from './components/api/UploadForm/UploadForm';
 import UserProfile from './components/api/UserProfile/UserProfile';
 import EditAsset from './components/api/EditAsset/EditAsset';
+import UserProfile2 from './components/api/UserProfile2/UserProfile2';
+import DisplayAsset from './components/api/DisplayAsset/DisplayAsset';
 
 import { Component } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
@@ -50,8 +52,11 @@ export default class App extends Component {
         <Route path="/upload" element={<UploadAsset/>}/>
         <Route path="/search" element ={<SearchAsset/>}/>
         <Route path="/edit" element ={<EditAsset/>}/>
+        <Route path="/display" element ={<DisplayAsset/>}/>
+
         <Route path ="/uploadForm" element={<UploadForm user={this.state.user}/>}/> 
         <Route path="userProfile" element={<UserProfile user={this.state.user}/>}/>
+        <Route path="userProfile2" element={<UserProfile2 user={this.state.user}/>}/>
         {this.state.user ? (
         <Route path="/login" element={<Navigate to="/" replace />}/>
         ) : (<Route path="/login" element ={<AuthPage setUserInState={this.setUserInState}/>}/>)}

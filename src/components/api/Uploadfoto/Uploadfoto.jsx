@@ -196,7 +196,6 @@ async function getAsset(asset){
   return (
     <div className="App page">
       <h3>{ assetName }</h3>
-      <h2>Uploadfoto</h2>
       <form onSubmit={submit}>
       <label>Name 
       <input onChange={(e)=>setName(e.target.value)} type="text" value={name} placeholder={ assetName }></input>

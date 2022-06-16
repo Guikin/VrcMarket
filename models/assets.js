@@ -9,14 +9,12 @@ const AssetSchema = new Schema({
     date:{type:Date,dateAdded:new Date()},
     tags:[{type:String}],
     Public: {type:Boolean,default: false },
-    AWSkey:{type:String,default:''},
+    AWSkey:{type:String},
     user:{type:String,required:true},
     code:{type:String},
     codelock:{type:Boolean,default:false},
     description:{type:String,default:''},
-    AWSEtag:{type:String,default:''},
-    lastModified:{type:Date},
-    size:{type:String,default:''}
+    AWSEtag:{type:String},
 })
 
 module.exports = mongoose.model('Assets', AssetSchema);

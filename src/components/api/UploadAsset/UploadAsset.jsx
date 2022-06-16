@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
 import axios from 'axios'
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 
 
 
@@ -14,25 +14,22 @@ async function downLoadAsset(key){
 
 export default function UploadAsset() {
   const location = useLocation()
+  const navigate = useNavigate()
 
    async function postAsset({asset}) {
         const formData = new FormData();
         formData.append("asset", asset)
-        const result = await axios.post('/s3/upload-to-s3', formData, { headers: {'Content-Type': 'multipart/form-data'}})
-        
+        const result = await axios.post('/s3/upload-to-s3',formData,{headers: {'Content-Type': 'multipart/form-data'}})
         setAwsKey(result.data.key)
-        setAwsEtag(result.data.ETag)
+        setAwsEtag(result.data.ETag.replace(/['"]+/g, ''))
         return result.data
       }
 
-          async function finalSubmit({assetData,asset,assetKey,userData,awsKey,awsEtag,isPublic,codeLock,code}){
-            console.log(asset)
-            
+          async function finalSubmit({asset,assetKey,userData,awsKey,awsEtag,isPublic,codeLock,code}){
             const fetchResponse = await fetch('/asset/edit2', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: {'Content-Type': 'application/json'},
               body: JSON.stringify({
-                assetData,
                 asset,
                 assetKey,
                 userData,
@@ -43,16 +40,25 @@ export default function UploadAsset() {
                 code
               })
             })
-          // if(fetchResponse.ok){
-          // const response = await fetchResponse.json()
-          // console.log("response is",response)
-          // }  
+          if(fetchResponse.ok){
+          const response = await fetchResponse.json()
+          console.log("response is",response)
+          console.log('public is',isPublic)
+          if(isPublic){
+            navigate('/display',{state:{user:userData,asset:assetKey}})
+          }else{
+            navigate('/userProfile2',{state:{user:userData,asset:assetKey}})
+          }
+          }else{
+            console.log('error')
+          }  
         }
-        
+
   useEffect(()=>{
     setAssetKey(location.state.asset)
-    setUser(location.state.user.name)
-    console.log(asset)
+    setUser(location.state.user)
+    console.log('Etag is',awsEtag)
+    console.log('key is',awsKey)
   })
     useEffect(()=>{
       async function getBucketObjectList() {
@@ -97,7 +103,7 @@ export default function UploadAsset() {
     
       const submit = async event => {
         event.preventDefault()
-        let submit = await finalSubmit({assetData,assetKey,userData,awsKey,awsEtag,isPublic,codeLock,code})
+        let submit = await finalSubmit({assetKey,userData,awsKey,awsEtag,isPublic,codeLock,code})
       }
     
       async function fileSelected (event) {

@@ -50,9 +50,11 @@ async function readFormData(req){
 
 async function getSignedUrl(req,res){
     try{
-        const {key} = req.params
+        console.log(req.params)
+        const key = req.params.key
+        const ETag = req.params.ETag
         console.log(key)
-        const url = await getPresignedURL('vrcmarketassets',key)
+        const url = await getPresignedURL('vrcmarketassets',key,ETag)
         console.log("url",url)
         res.send(url)
 

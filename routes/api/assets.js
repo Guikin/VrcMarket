@@ -7,6 +7,9 @@ router.post('/create', assetCtrl.create);
 // POST /api/users/login
 router.post('/edit', assetCtrl.edit);
 router.post('/edit2',assetCtrl.edit2)
+router.get('/listone/:asset',assetCtrl.displayAsset)
+router.get('/list/mine/:user',assetCtrl.listMyAssets)
+
 
 router.get('/:id',assetCtrl.list)
 

@@ -42,22 +42,17 @@ export default class Navbar extends Component{
                 <ul className="navbar-nav ms-auto text-center">
                   
                   <li className="nav-item">
-                  {this.props.user ? (<Link to="/userProfile" className='nav-link' onClick={this.loguser}>{this.props.user.name}</Link>):(
+                  {this.props.user ? (<Link to="/userProfile2" className='nav-link' onClick={this.loguser}>{this.props.user.name}</Link>):(
                     <p></p>
                   )}
                   </li>
                   <li className="nav-item">
                         <Link className="nav-link" to ='/uploadForm'>uploadform</Link>
                         </li>
-                  
-                <li className="nav-item">
-                        <Link className="nav-link" to ='/upload'>upload</Link>
-                        </li>
 
-                <li className="nav-item">
-                        <Link className="nav-link" to ='/photo'>photo</Link>
+                      <li className="nav-item">
+                        <Link className="nav-link" to ='/userProfile2'>Actual profile</Link>
                         </li>
-
                     <li className="nav-item">
                         <Link className="nav-link" to ='/'>Home</Link>
                         </li>

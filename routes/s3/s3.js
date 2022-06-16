@@ -33,7 +33,7 @@ router.post('/upload-to-s3',s3Ctrl.s3Upload);
 
 router.get('/all-files',s3Ctrl.s3Get); 
 
-router.get('/get-object-url/:key',s3Ctrl.getSignedUrl)
+router.get('/get-object-url/:key/:ETag',s3Ctrl.getSignedUrl)
 
 router.get("/download/:filename", async (req, res) => {
   console.log("reached download")
