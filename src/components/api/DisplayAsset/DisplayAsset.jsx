@@ -35,7 +35,7 @@ export default function DisplayAsset() {
     }
 
     useEffect(()=>{
-        setUser(location.state.user._id)
+        // setUser(location.state.user._id)
         setAssetKey(location.state.asset)
         if(!assetName){
         getActualAsset()

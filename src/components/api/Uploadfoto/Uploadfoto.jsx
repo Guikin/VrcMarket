@@ -139,7 +139,7 @@ async function getAsset(asset){
       <Carousel.Item>
         <div >
         <img 
-          style={{width:300+"px",height:300+"px"}}
+          style={{width:400+"px",height:300+"px"}}
           key ={image}
           className="d-block w-100"
           src={`s3/images/${image}`}

@@ -14,6 +14,7 @@ import DisplayAsset from './components/api/DisplayAsset/DisplayAsset';
 
 import { Component } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
+import ListAssets from './components/api/ListAssets/ListAssets';
 
 
 
@@ -53,7 +54,7 @@ export default class App extends Component {
         <Route path="/search" element ={<SearchAsset/>}/>
         <Route path="/edit" element ={<EditAsset/>}/>
         <Route path="/display" element ={<DisplayAsset/>}/>
-
+        <Route path="/listAsset" element={<ListAssets/>}/>
         <Route path ="/uploadForm" element={<UploadForm user={this.state.user}/>}/> 
         <Route path="userProfile" element={<UserProfile user={this.state.user}/>}/>
         <Route path="userProfile2" element={<UserProfile2 user={this.state.user}/>}/>

@@ -7,7 +7,8 @@ module.exports={
     edit2,
     list,
     listMyAssets,
-    displayAsset
+    displayAsset,
+    listAllAssets
 }
 
 async function create(req,res){
@@ -47,6 +48,17 @@ async function edit2(req,res){
      console.log('check is', check)
      let passed = "passed"
      res.status(200).json(passed)
+}
+async function listAllAssets(req,res){
+    if(!req.body.search){
+        req.body.search=''
+    }
+    let assets=[]
+    if(/\S/.test(req.body.search)){
+        assets = await Assets.find({ name: { $regex: req.body.search, $options: "i" }})
+    }else{assets = await Assets.find({})
+} 
+res.status(200).json(assets)
 }
 
 async function listMyAssets(req,res){
