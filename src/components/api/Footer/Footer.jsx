@@ -18,6 +18,7 @@ export default function Footer() {
             <p>Nature and Plants</p>
             <p>People</p>
             <p>NWeapons and Military</p>
+            {/*  */}
         </div>
         </div>
 
