@@ -51,6 +51,7 @@ return response
     //     }
     //     return author.name
     // }
+    //
 
     function displayAssetList(){
     if(listAsset){
