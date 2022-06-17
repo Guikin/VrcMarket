@@ -111,7 +111,7 @@ export default function UploadAsset() {
 
         return (
             <div className="App page">
-              <div className='bg-dark w-25 px-5 mx-auto rounded-3'>
+              <div className='bg-dark w-25 px-5 mx-auto rounded-3 fade-in'>
               <h2 className='p-4'>UploadAsset</h2>
               <form className='form-group' onSubmit={submit}>
                 <input className='btn btn-primary' onChange={fileSelected} type="file"></input>

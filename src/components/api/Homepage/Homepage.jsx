@@ -38,7 +38,7 @@ return response
     if(assets){
     return assets.map(asset=>
         
-    <div className="card bg-dark m-4 rounded" id={asset._id} 
+    <div className=" fade-in card bg-dark m-4 rounded" id={asset._id} 
     style={{minWidth:300+"px",textAlign:'left'}}>
         <Carousel>
         {asset.Pictures.map(image=>
@@ -80,11 +80,11 @@ return response
     <div className='page'>
         <div className='d-flex w-75 m-auto my-5 align-items-center'>
         {/* <iframe src='https://my.spline.design/shapesanimationcopy-cbdfeb528ef01e077fce4be8b4a708c5/' frameborder='0' width='50%' height='500px'></iframe> */}
-        <iframe src='https://my.spline.design/girlgumbubblecopy-8402ff9b123d042e34139e05fd706761/' frameborder='0' width='100%' height='500px'></iframe>
+        <iframe class="fade-in" src='https://my.spline.design/girlgumbubblecopy-8402ff9b123d042e34139e05fd706761/' frameborder='0' width='100%' height='500px'></iframe>
         <div>
-        <h2 className='w-50 m-auto'>Bucket is a free platform for sharing assets and files with anybody and Everybody
+        <h2 className='w-50 m-auto fade-in'>Bucket is a free platform for sharing assets and files with anybody and Everybody
         </h2>
-        <img  class='m-5'src="https://acegif.com/wp-content/uploads/2021/4fh5wi/pepefrg-48.gif" style={{borderRadius:30+"px",}}></img>
+        <img  class='m-5 fade-in'src="https://acegif.com/wp-content/uploads/2021/4fh5wi/pepefrg-48.gif" style={{borderRadius:30+"px",}}></img>
         </div>
         </div>
         

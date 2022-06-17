@@ -79,7 +79,7 @@ async function goToDelete(e){
       if(assets.length>0){
     return assets.map(asset=>
         
-    <div className="card bg-dark m-4 rounded" id={asset._id} 
+    <div className=" fade-in card bg-dark m-4 rounded" id={asset._id} 
     style={{width:20+"rem",textAlign:'left'}}>
         <Carousel>
         {asset.Pictures.map(image=>
@@ -126,16 +126,16 @@ async function goToDelete(e){
   return (
      <div className='page'>
       <div>
-        <div className='d-flex profilebg justify-content-between w-100 m-auto'>
+        <div className=' fade-in d-flex profilebg justify-content-between w-100 m-auto'>
           <div className='w-5 m-auto'>
       <h1 style={{textAlign:'left'}} className='w '>{props.user.name} Profile </h1></div>
       <div className='w-5 m-auto'>
     <Link to ="/uploadForm"><button className='btn btn-light'>Upload</button></Link></div>
     </div>
     </div>
-    <h3 style={{textAlign:'left'}} className="w-50 m-auto mt-5 mb-3">My Uploads</h3>
-    <hr className='border border-secondary w-75 m-auto'/>
-    <div className='d-flex w-75 m-auto flex-wrap justify-content-center'>
+    <h3 style={{textAlign:'left'}} className=" fade-in w-50 m-auto mt-5 mb-3">My Uploads</h3>
+    <hr className=' border border-secondary w-75 m-auto'/>
+    <div className='fade-in d-flex w-75 m-auto flex-wrap justify-content-center'>
 
       {displayAssetList()}
     </div>

@@ -56,7 +56,7 @@ const submit = async event => {
   }
 
   return (
-    <div className='page'>
+    <div className='page fade-in'>
       <div className='bg-dark w-25 px-5 mx-auto rounded-3'>
         <h3 className='p-4'>Upload an Asset</h3>
         <form className='form-group' onSubmit={submit}>

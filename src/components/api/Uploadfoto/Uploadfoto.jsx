@@ -196,7 +196,7 @@ async function getAsset(asset){
   ];
 
   return (
-    <div className="App page">
+    <div className="App page fade-in">
       <div className='bg-dark w-25 px-5 mx-auto rounded-3'>
       <h3 className='p-4 '>{ assetName }</h3>
       <form className='form-group' onSubmit={submit}>

@@ -122,7 +122,7 @@ export default function DisplayAsset() {
 
   return(  
     <div className='page'>
-    <div className='p-2-light mx-auto w-50 rounded'>
+    <div className='p-2-light mx-auto w-50 rounded fade-in'>
     <Carousel fade>
         {showPics()}
     </Carousel>

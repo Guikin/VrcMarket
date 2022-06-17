@@ -57,7 +57,7 @@ return response
     if(listAsset){
     return listAsset.map(asset=>
         
-    <div className="card bg-dark m-4 rounded" id={asset._id} 
+    <div className=" fade-in card bg-dark m-4 rounded" id={asset._id} 
     style={{width:25+"rem",height:35+'rem',textAlign:'left'}}>
         <Carousel>
         {asset.Pictures.map(image=>

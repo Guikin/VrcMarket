@@ -43,7 +43,7 @@ export default class SignUpForm extends Component {
   render() {
     return (
       <div className>
-        <div className="form-container " onSubmit={this.handleSubmit}>
+        <div className="form-container fade-in " onSubmit={this.handleSubmit}>
           <form autoComplete="off" >
             <label className='lead'>Email</label>
             <input className='form-control bg-dark text-light' type="text" name="email" placeholder="Somthing@Gmail.com" value={this.state.email} onChange={this.handleChange} required />
