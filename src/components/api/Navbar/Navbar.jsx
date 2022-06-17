@@ -39,7 +39,7 @@ export default class Navbar extends Component{
                 <img src="https://cdn.discordapp.com/attachments/963368879927730188/971311104871530527/vrctitle.png" alt="Bootstrap" style={{width:150 +"px",height:50+"px"}} className="d-inline-block align-top"/>
                 {/* <!-- <span class="hidden">Bootstrap</span> --> */}
               </a>
-              <div className='nav-item'>
+              <div className=' navbar-nav nav-item'>
               <p className='nav-link align-self-center m-0'>Discover</p>
               </div>
               
@@ -73,15 +73,8 @@ export default class Navbar extends Component{
                         <Link className="nav-link" to ='/uploadForm'>uploadform</Link>
                         </li>
 
-                      <li className="nav-item">
-                        <Link className="nav-link" to ='/userProfile2'>Actual profile</Link>
-                        </li>
                     <li className="nav-item">
                         <Link className="nav-link" to ='/'>Home</Link>
-                        </li>
-
-                    <li className="nav-item">
-                        <Link className="nav-link" to ='/search'>search</Link>
                         </li>
 
                         {this.props.user ? ( <li className="nav-item">

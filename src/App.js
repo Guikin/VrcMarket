@@ -11,6 +11,7 @@ import UserProfile from './components/api/UserProfile/UserProfile';
 import EditAsset from './components/api/EditAsset/EditAsset';
 import UserProfile2 from './components/api/UserProfile2/UserProfile2';
 import DisplayAsset from './components/api/DisplayAsset/DisplayAsset';
+import Footer from './components/api/Footer/Footer';
 
 import { Component } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
@@ -63,6 +64,8 @@ export default class App extends Component {
         ) : (<Route path="/login" element ={<AuthPage setUserInState={this.setUserInState}/>}/>)}
         
       </Routes>
+
+      <Footer etUserInState={this.setUserInState} user={this.state.user}/>
       </div>
     )
   }

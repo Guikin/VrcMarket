@@ -1,11 +1,30 @@
+import { getSuggestedQuery } from '@testing-library/react';
 import React, { useEffect, useRef, useState } from 'react'
 import { Carousel } from 'react-bootstrap';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+
 
 export default function ListAssets() {
     let location = useLocation()
     let navigate = useNavigate()
     const isInitialMount = useRef(true);
+
+async function getAuthorFromDb(authorId){
+    const fetchResponse = await fetch('/asset/getAuthor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          authorId
+        })
+      })
+    if(fetchResponse.ok){
+const response = await fetchResponse.json()
+setAuthors([response.name,...authors])
+return response
+    }else{
+        console.log('error')
+    }
+}
   
     useEffect(()=>{
         if(location.state.assetList){
@@ -13,7 +32,8 @@ export default function ListAssets() {
         }
     },[location.state.assetList])
 
-    const [listAsset,setlistAsset]=useState()  
+    const [listAsset,setlistAsset]=useState() 
+    const [authors,setAuthors]=useState([]) 
     
     
     function goToAsset(e){
@@ -23,33 +43,49 @@ export default function ListAssets() {
         }
     }
 
+    // async function getAuthor(authorId){
+    //     console.log(authors.length)
+    //     let author=''
+    //     if(listAsset.length !== authors.length){
+    //      author = await getAuthorFromDb(authorId)
+    //     }
+    //     return author.name
+    // }
+
     function displayAssetList(){
     if(listAsset){
     return listAsset.map(asset=>
         
-    <div className="card bg-dark m-4 border-secondary" id={asset._id} 
-
-    // onClick={(e)=>goToAsset(e.target)} 
-
-    style={{width:25+"rem"}}>
+    <div className="card bg-dark m-4 rounded" id={asset._id} 
+    style={{width:25+"rem",textAlign:'left'}}>
         <Carousel>
         {asset.Pictures.map(image=>
             <Carousel.Item >
             <img 
-              style={{Width:'auto',height:300+"px"}}
+              style={{Width:'100%',height:400+"px"}}
               key ={image}
-              className="m-auto"
+              className="m-auto rounded"
               src={`s3/images/${image}`}
               alt="Pictures"
             />
           </Carousel.Item>
         )}
         </Carousel>
-  <img className="card-img-top" src="" alt="Card image cap"/>
+  
   <div className="card-body">
-    <h5 className="card-title">{asset.name}</h5>
-    <p className="card-text">{asset.description}</p>
-    <button onClick={(e)=>goToAsset(e.target)}>View </button>
+    <div className='d-flex justify-content-between align-items-center'>
+        <h5 className="card-title">{asset.name}</h5>
+         <p className="border border-secondary p-2 rounded">Free</p>
+    </div>
+    <div className='d-flex justify-content-between'>
+        <p>{asset.AuthorName}</p>
+    <div className="d-flex ">
+            <p className='mx-2'> ♥ {asset.Downloads}</p>
+            <p className='mx-2'> ⭐ {asset.Rating} </p>
+            </div>
+    </div>
+    
+    <button className="btn btn-outline-light" onClick={(e)=>goToAsset(e.target)}>View </button>
     {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
   </div>
   </div>)
@@ -60,7 +96,7 @@ export default function ListAssets() {
 }
   return (
     
-    <div className='page'>ListAssets
+    <div className='page'>
     <div className='d-flex w-75 m-auto flex-wrap justify-content-center'>
     {displayAssetList()}
     </div>

@@ -20,7 +20,7 @@ const fetchResponse = await fetch('/asset/create', {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: name, 
-          user: user 
+          user: user, 
         })
       })
     if(fetchResponse.ok){

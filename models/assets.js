@@ -15,6 +15,7 @@ const AssetSchema = new Schema({
     codelock:{type:Boolean,default:false},
     description:{type:String,default:''},
     AWSEtag:{type:String},
+    AuthorName:{type:String}
 })
 
 module.exports = mongoose.model('Assets', AssetSchema);

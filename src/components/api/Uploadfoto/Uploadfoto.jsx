@@ -115,8 +115,10 @@ async function getAsset(asset){
   
 
   async function postPics(){
-    const result = await postImage({image: file})
+    if(images.length<6){
+      const result = await postImage({image: file})
     setImages([result,...images])
+    }
   }
 
   const fileSelected = event => {
@@ -137,7 +139,7 @@ async function getAsset(asset){
     if(images.length>0){
     return images.map(image=>
       <Carousel.Item>
-        <div >
+        <div>
         <img 
           style={{width:400+"px",height:300+"px"}}
           key ={image}
@@ -146,7 +148,7 @@ async function getAsset(asset){
           alt="Pictures"
         /></div>
         <Carousel.Caption>
-          <h3 id={`${image}`} onClick={(e)=>deletePic(e.target)}>remove</h3>
+          <button className='btn btn-light' id={`${image}`} onClick={(e)=>deletePic(e.target)}>remove</button>
         </Carousel.Caption>
       </Carousel.Item>
     )}else{

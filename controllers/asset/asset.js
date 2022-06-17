@@ -1,5 +1,6 @@
 const Assets = require('../../models/assets');
 const formidable = require('formidable');
+const User =require("../../models/user")
 
 module.exports={
     create,
@@ -8,12 +9,18 @@ module.exports={
     list,
     listMyAssets,
     displayAsset,
-    listAllAssets
+    listAllAssets,
+    getAuthor
+}
+
+async function getAuthor(req,res){
+    let author = await User.findById(req.body.authorId)
+    res.status(200).json(author)
 }
 
 async function create(req,res){
     // const formData = await readFormData(req)
-    let newAsset = await Assets.create({name:req.body.name,user:req.body.user})
+    let newAsset = await Assets.create({name:req.body.name,user:req.body.user,AuthorName:req.body.author})
     let findAll = await Assets.find({})
     res.status(200).json(newAsset.id)
 }

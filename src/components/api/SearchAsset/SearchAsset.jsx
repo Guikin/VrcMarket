@@ -36,9 +36,11 @@ async function searchAsset({search}){
 
   const submit = async event => {
     event.preventDefault()
-    const result = await searchAsset({search })
+    const result = await searchAsset({search})
     return result
   }
+
+
   
   return (
 

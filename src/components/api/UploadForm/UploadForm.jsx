@@ -13,14 +13,15 @@ const navigate = useNavigate()
 
 
 
-async function handleClick({name,user}){
+async function handleClick({name,user,author}){
 
 const fetchResponse = await fetch('/asset/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: name, 
-          user: user 
+          user: user,
+          author:author
         })
       })
     if(fetchResponse.ok){
@@ -40,6 +41,7 @@ useEffect(()=>{
     if(asset){
         navigate('/photo',{state:{user:props.user,asset:asset}})
     }
+    
 })
 
 
@@ -49,7 +51,7 @@ const [name, setName] = useState('')
 
 const submit = async event => {
     event.preventDefault()
-    const result = await handleClick({name, user:props.user._id })
+    const result = await handleClick({name, user:props.user._id, author:props.user.name })
     return result
   }
 
