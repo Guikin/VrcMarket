@@ -6,7 +6,7 @@ const AssetSchema = new Schema({
     Pictures : [{type:String}],
     Downloads : {type:Number,default :0},
     Rating: {type:Number,default :0},
-    date:{type:Date,dateAdded:new Date()},
+    dateCreated: {type: Date, default: Date.now},
     tags:[{type:String}],
     Public: {type:Boolean,default: false },
     AWSkey:{type:String},
@@ -15,7 +15,12 @@ const AssetSchema = new Schema({
     codelock:{type:Boolean,default:false},
     description:{type:String,default:''},
     AWSEtag:{type:String},
-    AuthorName:{type:String}
+    AuthorName:{type:String},
+    
+},{
+    timestamp: { type: Date, default: Date.now},
 })
 
 module.exports = mongoose.model('Assets', AssetSchema);
+
+

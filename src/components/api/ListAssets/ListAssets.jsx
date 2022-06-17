@@ -62,7 +62,7 @@ return response
         {asset.Pictures.map(image=>
             <Carousel.Item >
             <img 
-              style={{Width:'100%',height:400+"px"}}
+              style={{width:100+"%",height:350+"px"}}
               key ={image}
               className="m-auto rounded"
               src={`s3/images/${image}`}

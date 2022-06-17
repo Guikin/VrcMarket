@@ -51,19 +51,32 @@ export default class App extends Component {
 
       <Routes>
         <Route path="/" element={<Homepage/>}/>
-        <Route path="/photo" element={<Uploadfoto user={this.state.user}/>}/>
-        <Route path="/upload" element={<UploadAsset/>}/>
+       
         <Route path="/search" element ={<SearchAsset/>}/>
-        <Route path="/edit" element ={<EditAsset/>}/>
         <Route path="/display" element ={<DisplayAsset/>}/>
         <Route path="/listAsset" element={<ListAssets/>}/>
-        <Route path ="/uploadForm" element={<UploadForm user={this.state.user}/>}/> 
+         
         <Route path="userProfile" element={<UserProfile user={this.state.user}/>}/>
-        <Route path="userProfile2" element={<UserProfile2 user={this.state.user}/>}/>
+        
+        {this.state.user ? (<Route path="/upload" element={<UploadAsset/>}/>) : (<Route path="/upload" element={<Navigate to="/" replace />}/>) }
+
+        {this.state.user ? (<Route path="/edit" element ={<EditAsset/>}/>) : (<Route path="/edit" element ={<Navigate to="/" replace />}/>)}
+       
+
+        {this.state.user ? (<Route path="/photo" element={<Uploadfoto user={this.state.user}/>}/>):(<Route path="/photo" element={<Navigate to="/" replace />}/>)}
+        
+
+        {this.state.user ? (<Route path="userProfile2" element={<UserProfile2 user={this.state.user}/>}/>) : (<Route path="userProfile2" element={<Navigate to="/" replace />}/>) }
+
+        {this.state.user ? (<Route path="/photo" element={<Uploadfoto user={this.state.user}/>}/>): (<Route path="/photo" element={<Navigate to="/" replace />}/>)}
+
+        {this.state.user ? (<Route path ="/uploadForm" element={<UploadForm user={this.state.user}/>}/>):(<Route path ="/uploadForm" element={<Navigate to="/" replace />}/>) }
+        
         {this.state.user ? (
         <Route path="/login" element={<Navigate to="/" replace />}/>
         ) : (<Route path="/login" element ={<AuthPage setUserInState={this.setUserInState}/>}/>)}
         
+        <Route path="/*" element={<Homepage/>}/>
       </Routes>
 
       <Footer etUserInState={this.setUserInState} user={this.state.user}/>

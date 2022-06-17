@@ -25,23 +25,30 @@ export default function DisplayAsset() {
           setUpState(response)
           return response
         }
-    async function sendDownload(){
+    
+        async function sendDownload(){
         const fetchResponse = await fetch('/asset/listone/'+location.state.asset,{
             method: 'GET',
           })
+          return fetchResponse
     }
     async function getAuthor(assetAuthor){
-
     }
+
 
     useEffect(()=>{
         // setUser(location.state.user._id)
         setAssetKey(location.state.asset)
-        if(!assetName){
-        getActualAsset()
-    } console.log(codeLock)
-        },)
         
+        },[location.state.asset,])
+
+        useEffect(()=>{
+          
+          if(!assetName){
+          getActualAsset()
+        }
+        },)
+
         function setUpState(response){
           setAssetname(response.name)
           setAssetAwsKey(response.AWSkey)
@@ -74,7 +81,7 @@ export default function DisplayAsset() {
   const [enteredCode,setEnterCode]=useState()
   
   async function download(){
-    // await downLoadAsset({key:AwsKey,ETag:AwsTag})
+    await downLoadAsset({key:AwsKey,ETag:AwsTag})
     let newdownload = assetDownloads +1
     setAssetDownloads(newdownload)
     sendDownload()
@@ -121,7 +128,7 @@ export default function DisplayAsset() {
     </Carousel>
     </div>
     <div className=' pb-5 w-50 mx-auto my-4 rounded bg-dark'>
-     <div className='d-flex justify-content-between py-4 m-4'>
+     <div className='d-flex justify-content-between py-4 mx-4'>
             <h2 className='m' style={{'textAlign':'left'}}>{assetName}</h2>
             <div className='d-flex '>
             <p className='mx-2'> ♥ {assetDownloads}</p>
@@ -129,7 +136,7 @@ export default function DisplayAsset() {
         </div>
         </div>
         
-        <div className='d-flex justify-content-between m-4 align-items-center'>
+        <div className='d-flex justify-content-between mx-4 align-items-center'>
             
             <h5 style={{'textAlign':'left'}}>{authorName}</h5>
             

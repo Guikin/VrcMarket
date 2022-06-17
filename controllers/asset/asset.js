@@ -10,7 +10,9 @@ module.exports={
     listMyAssets,
     displayAsset,
     listAllAssets,
-    getAuthor
+    getAuthor,
+    deleteMyAssets,
+    getAssetByDate
 }
 
 async function getAuthor(req,res){
@@ -69,7 +71,8 @@ res.status(200).json(assets)
 }
 
 async function listMyAssets(req,res){
-    console.log('reached my assets')
+    let getAsset = await Assets.find({user:req.body.user})
+    res.status(200),res.json(getAsset)
 }
 
 async function displayAsset(req,res){
@@ -81,4 +84,16 @@ async function list(req,res){
     console.log(req.params.id)
     let getAsset= await Assets.findById(req.params.id)
     res.status(200).json(getAsset.name)
+}
+
+async function deleteMyAssets(req,res){
+    console.log(req.body.assetKey)
+    let getAsset = await Assets.findByIdAndDelete(req.body.assetKey)
+    console.log(getAsset)
+}
+
+
+async function getAssetByDate(req,res){
+    let getAsset = await Assets.find({}).sort({ dateCreated: -1 }).limit(10)
+    res.status(200).json(getAsset)
 }

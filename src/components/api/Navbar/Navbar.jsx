@@ -33,12 +33,12 @@ export default class Navbar extends Component{
 
   render(){
   return (
-    <div className='navbar'>
-        <nav className="navbar navbar-expand-lg bg-dark navbar-dark fixed-top w-100 m-auto px-5" style={{boxshadow:0+0+3 +"em" + "black justify-content-around" }}>
-            <a className="navbar-brand" href="/">
-                <img src="https://cdn.discordapp.com/attachments/963368879927730188/971311104871530527/vrctitle.png" alt="Bootstrap" style={{width:150 +"px",height:50+"px"}} className="d-inline-block align-top"/>
+    <div className='navbar '>
+        <nav className="navbar navbg navbar-expand-lg bg-dark navbar-dark fixed-top w-100 m-auto px-5" style={{boxshadow:0+0+3 +"em" + "black justify-content-around" }}>
+            <Link  to ='/'className="navbar-brand" >
+                <img src="https://cdn.discordapp.com/attachments/963368879927730188/987226489856589824/bucket_resized.png" alt="Bootstrap" style={{width:120 +"px",height:35+"px"}} className="d-inline-block align-top "/></Link>
                 {/* <!-- <span class="hidden">Bootstrap</span> --> */}
-              </a>
+              
               <div className=' navbar-nav nav-item'>
               <p className='nav-link align-self-center m-0'>Discover</p>
               </div>

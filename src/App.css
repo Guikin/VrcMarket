@@ -1,19 +1,28 @@
 .App {
   text-align: center;
   background-color: rgb(23, 23, 26);
-  height: 100vh;
+  
 }
 
 .footer{
   background-image:url("https://cdn.discordapp.com/attachments/963368879927730188/987196469503205426/footer_bg.jpg");
-  position:fixed;
-  bottom:0;
+  position: relative;
   width: 100%;
-  text-align:left
+  text-align:left;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .bold-text{
   font-weight: bold;
 }
 .page{
+  height: 100vh;
   margin-top: 100px;
+}
+
+.navbg{
+  background-image:url("https://cdn.discordapp.com/attachments/963368879927730188/987196469503205426/footer_bg.jpg");
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
