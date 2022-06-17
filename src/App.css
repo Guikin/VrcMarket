@@ -3,7 +3,14 @@
   background-color: rgb(23, 23, 26);
   
 }
-
+.profilebg{
+background-image: url("https://cdn.discordapp.com/attachments/963368879927730188/987301044465860668/profile_bg.png");
+height:200px;
+width:100%;
+  text-align:left;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .footer{
   background-image:url("https://cdn.discordapp.com/attachments/963368879927730188/987196469503205426/footer_bg.jpg");
   position: relative;

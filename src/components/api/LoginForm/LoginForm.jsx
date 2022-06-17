@@ -42,17 +42,17 @@ export default class SignUpForm extends Component {
 
   render() {
     return (
-      <div>
-        <div className="form-container" onSubmit={this.handleSubmit}>
+      <div className>
+        <div className="form-container " onSubmit={this.handleSubmit}>
           <form autoComplete="off" >
-            <label>Email</label>
-            <input type="text" name="email" value={this.state.email} onChange={this.handleChange} required />
+            <label className='lead'>Email</label>
+            <input className='form-control bg-dark text-light' type="text" name="email" placeholder="Somthing@Gmail.com" value={this.state.email} onChange={this.handleChange} required />
             <label>Password</label>
-            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-            <button type="submit">LOG IN</button>
+            <input className='form-control bg-dark text-light' type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
+            <button type="submit" className='btn btn-primary'>LOG IN</button>
           </form>
         </div>
-        <p className="error-message">&nbsp;{this.state.error}</p>
+        <p className="error-message lead text-danger">&nbsp;{this.state.error}</p>
       </div>
     );
   }

@@ -57,7 +57,7 @@ return response
     return listAsset.map(asset=>
         
     <div className="card bg-dark m-4 rounded" id={asset._id} 
-    style={{width:25+"rem",textAlign:'left'}}>
+    style={{width:25+"rem",height:35+'rem',textAlign:'left'}}>
         <Carousel>
         {asset.Pictures.map(image=>
             <Carousel.Item >
@@ -97,16 +97,15 @@ return response
   return (
     
     <div className='page'>
-    <div className='d-flex w-75 m-auto flex-wrap justify-content-center'>
+    <div className='d-flex w-75 h-100 m-auto flex-wrap justify-content-center overflow-auto'>
     {displayAssetList()}
     </div>
-    
 
     {/* <ul> 
               {assetData.map(asset => (
               <li key={asset.eTag}><button onClick={()=>downLoadAsset(asset.key)}>{asset.key}</button></li>
                 ))}</ul>  */}
     </div>
-    
+
   )
 }

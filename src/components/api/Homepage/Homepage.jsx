@@ -78,8 +78,9 @@ return response
 
   return (
     <div className='page'>
-        <div className='d-flex w-75 m-auto my-5'>
-        <iframe src='https://my.spline.design/shapesanimationcopy-cbdfeb528ef01e077fce4be8b4a708c5/' frameborder='0' width='50%' height='500px'></iframe>
+        <div className='d-flex w-75 m-auto my-5 align-items-center'>
+        {/* <iframe src='https://my.spline.design/shapesanimationcopy-cbdfeb528ef01e077fce4be8b4a708c5/' frameborder='0' width='50%' height='500px'></iframe> */}
+        <iframe src='https://my.spline.design/girlgumbubblecopy-8402ff9b123d042e34139e05fd706761/' frameborder='0' width='100%' height='500px'></iframe>
         <div>
         <h2 className='w-50 m-auto'>Bucket is a free platform for sharing assets and files with anybody and Everybody
         </h2>

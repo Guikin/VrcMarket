@@ -129,16 +129,16 @@ export default function DisplayAsset() {
     </div>
     <div className=' pb-5 w-50 mx-auto my-4 rounded bg-dark'>
      <div className='d-flex justify-content-between py-4 mx-4'>
-            <h2 className='m' style={{'textAlign':'left'}}>{assetName}</h2>
+            <h2 className='display-4' style={{'textAlign':'left'}}>{assetName}</h2>
             <div className='d-flex '>
-            <p className='mx-2'> ♥ {assetDownloads}</p>
-            <p className='mx-4'> ⭐ 56 </p>
+            <p className='mx-2 lead'> ♥ {assetDownloads}</p>
+            <p className='mx-4 lead'> ⭐ 56 </p>
         </div>
         </div>
         
-        <div className='d-flex justify-content-between mx-4 align-items-center'>
+        <div className='d-flex justify-content-between mx-4 align-items-center rounded-3'>
             
-            <h5 style={{'textAlign':'left'}}>{authorName}</h5>
+            <h5 className='lead' style={{'textAlign':'left'}}>{authorName}</h5>
             
             <button style={{'textAlign':'right'}} className="mx-4 btn btn-secondary">Follow</button>
         </div>

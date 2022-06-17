@@ -44,8 +44,8 @@ async function searchAsset({search}){
   
   return (
 
-    <form onSubmit={submit} >
-              <input type='text'onChange={(e)=>setSearch(e.target.value)} onInput={submit} className='mx-5 w-100' placeholder="Search" name="search" value={search}></input>
+    <form className='' onSubmit={submit} >
+              <input type='text'onChange={(e)=>setSearch(e.target.value)} onInput={submit} className='mx-5 w-100 form-control bg-dark text-light' placeholder="Search" name="search" value={search}></input>
               
           </form>
   )

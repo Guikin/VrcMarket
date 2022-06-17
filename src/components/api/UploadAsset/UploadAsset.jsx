@@ -44,11 +44,7 @@ export default function UploadAsset() {
           const response = await fetchResponse.json()
           console.log("response is",response)
           console.log('public is',isPublic)
-          if(isPublic){
-            navigate('/display',{state:{user:userData,asset:assetKey}})
-          }else{
-            navigate('/userProfile2',{state:{user:userData,asset:assetKey}})
-          }
+          navigate('/display',{state:{user:userData,asset:assetKey}})
           }else{
             console.log('error')
           }  
@@ -115,27 +111,33 @@ export default function UploadAsset() {
 
         return (
             <div className="App page">
-              <h2>UploadAsset</h2>
-              <form onSubmit={submit}>
-                <input onChange={fileSelected} type="file"></input>
-                {awsKey ? 'AssetUploaded':'no file uploaded'}
-                <label>Puclic
+              <div className='bg-dark w-25 px-5 mx-auto rounded-3'>
+              <h2 className='p-4'>UploadAsset</h2>
+              <form className='form-group' onSubmit={submit}>
+                <input className='btn btn-primary' onChange={fileSelected} type="file"></input>
+                {awsKey ? <p className="lead">AssetUploaded!</p>: <p className="lead">No File Uploaded</p>}
+                <div className>
+                <label className='lead '>Puclic
                 <input
+                className='m-3'
                       type="checkbox"
                       value="Public"
                       checked={isPublic}
                       onChange={handleOnChange}/>
                   </label>
-                  <label>Codelock
+                  <label className='lead'>Codelock
                     <input
+                    className='m-3 '
                           type="checkbox"
                           value="Public"
                           checked={codeLock}
                           onChange={handleOnCodeLock}/>
                       </label>
-                      {codeLock ? (<label>Code<input onChange={(e)=>setCode(e.target.value)} type='text'value={code} placeholder='enter code'required minLength="5" /></label>) : 'Free for all'}
-                <button type="submit">Submit</button>
+                      {codeLock ? (<input className="form-control bg-dark text-light" onChange={(e)=>setCode(e.target.value)} type='text'value={code} placeholder='enter code'required minLength="5"/>) : <p className='lead text-success'>Free for all</p>}</div>
+                <button type="submit" className='btn btn-success'>Post Asset</button>
               </form>
+
+              <iframe src='https://my.spline.design/superkidrobotcopy-1d2b637853dd340d6bdd569ec3023bc5/' frameborder='0' width='100%' height='400px'></iframe>
 
               {/* <button onClick={handleClick}>click image</button> */}
 
@@ -145,7 +147,7 @@ export default function UploadAsset() {
               {assetData.map(asset => (
               <li key={asset.eTag}><button onClick={()=>downLoadAsset(asset.key)}>{asset.key}</button></li>
                 ))}</ul>  */}
-                
+                </div>
             </div>
           );
         }

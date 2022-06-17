@@ -46,7 +46,7 @@ return response
     }
     if(!assets && currentUser){
       getMyAssets(props.user._id)
-    }
+    }console.log(assets)
     
   })
 
@@ -76,6 +76,7 @@ async function goToDelete(e){
 
   function displayAssetList(){
     if(assets){
+      if(assets.length>0){
     return assets.map(asset=>
         
     <div className="card bg-dark m-4 rounded" id={asset._id} 
@@ -109,15 +110,14 @@ async function goToDelete(e){
 
     
     <button className="btn btn-light mx-2" onClick={(e)=>goToAsset(e.target)}>View </button>
-    <button className="btn btn-outline-warning mx-4" onClick={(e)=>goToUpdate(e.target)}>Edit </button>
-    <button className="btn btn-outline-danger mx-2" onClick={(e)=>goToDelete(e.target)}>Delete </button>
+    <button className="btn btn-outline-warning mx-4"onClick={(e)=>goToUpdate(e.target)}>Edit </button>
+    <button className="btn btn-outline-danger mx-2"onClick={(e)=>goToDelete(e.target)}>Delete </button>
   
     {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
   </div>
   </div>)
-    
-    }else{
-        return <p>none</p>
+  }else{
+    return <h4 className='m-5'>No Assets Uploaded</h4>}
     }
 }
 
@@ -126,10 +126,15 @@ async function goToDelete(e){
   return (
      <div className='page'>
       <div>
-      {props.user.name}
-    <Link to ="/uploadForm"><button>Upload</button></Link>
+        <div className='d-flex profilebg justify-content-between w-100 m-auto'>
+          <div className='w-5 m-auto'>
+      <h1 style={{textAlign:'left'}} className='w '>{props.user.name} Profile </h1></div>
+      <div className='w-5 m-auto'>
+    <Link to ="/uploadForm"><button className='btn btn-light'>Upload</button></Link></div>
     </div>
-    <h3 style={{textAlign:'left'}} className="w-50 m-auto">My Uploads</h3>
+    </div>
+    <h3 style={{textAlign:'left'}} className="w-50 m-auto mt-5 mb-3">My Uploads</h3>
+    <hr className='border border-secondary w-75 m-auto'/>
     <div className='d-flex w-75 m-auto flex-wrap justify-content-center'>
 
       {displayAssetList()}

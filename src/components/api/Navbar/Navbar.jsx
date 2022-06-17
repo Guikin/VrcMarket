@@ -69,9 +69,10 @@ export default class Navbar extends Component{
                     <p></p>
                   )}
                   </li>
-                  <li className="nav-item">
+                  {this.props.user ? (<li className="nav-item">
                         <Link className="nav-link" to ='/uploadForm'>uploadform</Link>
-                        </li>
+                        </li> ) : (<p></p> ) }
+                  
 
                     <li className="nav-item">
                         <Link className="nav-link" to ='/'>Home</Link>
@@ -80,7 +81,7 @@ export default class Navbar extends Component{
                         {this.props.user ? ( <li className="nav-item">
                         <button className="btn btn-dark nav-link" onClick={this.handleLogout}>Logout</button>
                         </li>) : ( <li className="nav-item">
-                        <Link className="nav-link" to ='/login'>login</Link>
+                        <Link className="nav-link btn btn-light text-dark" to ='/login'>login</Link>
                         </li>
                         )}
                 </ul>

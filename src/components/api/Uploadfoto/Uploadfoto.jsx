@@ -197,19 +197,20 @@ async function getAsset(asset){
 
   return (
     <div className="App page">
-      <h3>{ assetName }</h3>
-      <form onSubmit={submit}>
-      <label>Name 
-      <input onChange={(e)=>setName(e.target.value)} type="text" value={name} placeholder={ assetName }></input>
+      <div className='bg-dark w-25 px-5 mx-auto rounded-3'>
+      <h3 className='p-4 '>{ assetName }</h3>
+      <form className='form-group' onSubmit={submit}>
+      <label style={{textAlign:'left'}} className="lead">UpdateName 
+      <input className='form-control bg-dark text-light' onChange={(e)=>setName(e.target.value)} type="text" value={name} placeholder={ assetName }></input>
       </label>
-        <input onChange={fileSelected} type="file"></input>
+        <input className='btn btn-primary' onChange={fileSelected} type="file"></input>
         <Carousel>
         {showPics()}
         </Carousel>
-        <label>Description</label>
-        <textarea onChange={(e)=>setDescription(e.target.value)} type="text" rows="6" cols="50" value={description} required placeholder="description"></textarea>
-        <label>Category</label>
-        <select value={categories} onChange={(e)=>setCategories(e.target.value)} >
+        <label style={{textAlign:'left'}} className="lead">Description</label>
+        <textarea className='form-control bg-dark text-light' onChange={(e)=>setDescription(e.target.value)} type="text" rows="6" cols="50" value={description} required placeholder="description"></textarea>
+        <label style={{textAlign:'left'}} className="lead" >Category</label>
+        <select className='form-control bg-dark text-light' value={categories} onChange={(e)=>setCategories(e.target.value)} >
             {options.map((option) => (
               <option value={option.value}>{option.label}</option>
             ))}
@@ -224,9 +225,11 @@ async function getAsset(asset){
           <option onChange={(e)=>setCategories(e.target.value)} value="People">People</option>
           <option onChange={(e)=>setCategories(e.target.value)} value="Weapons-Military">Weapons-Military</option>
           </select> */}
-        <button type="submit">Submit</button>
+        <button type="submit" className='btn btn-success'>Continue</button>
       </form>
-      
+
+      <iframe src='https://my.spline.design/molang3dcopy-2134cd7fa7df0fc7a07107eba700ec34/' frameborder='0' width='100%' height='400px'></iframe>
+      </div>
       
       
 

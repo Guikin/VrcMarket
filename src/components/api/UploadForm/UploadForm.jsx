@@ -57,16 +57,18 @@ const submit = async event => {
 
   return (
     <div className='page'>
-        <p>UserProfile</p>
-        <form onSubmit={submit}>
+      <div className='bg-dark w-25 px-5 mx-auto rounded-3'>
+        <h3 className='p-4'>Upload an Asset</h3>
+        <form className='form-group' onSubmit={submit}>
 
-        <label>Name
-        <input onChange={(e)=>setName(e.target.value)} type="text" value={name} required></input></label>
+  
+        <input onChange={(e)=>setName(e.target.value)} type="text" className='form-control bg-dark text-light' value={name} required placeholder="Asset Name"></input>
         <br/>
-        <button>Create</button>
+        <button className='btn btn-success'>Create</button>
         </form>
+        <iframe src='https://my.spline.design/shapesanimationcopy-cbdfeb528ef01e077fce4be8b4a708c5/' frameborder='0' width='100%' height='450px'></iframe> 
         <p>{ name }</p>
-
+        </div>
         
         
         </div>
